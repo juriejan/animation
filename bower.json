@@ -9,17 +9,32 @@
     "type": "git",
     "url": "git+https://github.com/juriejan/animation.git"
   },
-  "main": [],
+  "main": [
+    "dist/js/animation.js"
+  ],
   "description": "",
   "ignore": [
     ".editorconfig",
     ".gitignore",
-    "scripts"
+    "scripts",
+    "src",
+    "test"
   ],
-  "source": ["src/**/*"],
-  "build-target": "dest/js/animation.js",
+  "source": [
+    "src/**/*"
+  ],
+  "build-target": "dist/js/animation.js",
   "globals": {},
-  "resolutions": {},
-  "dependencies": {},
-  "devDependencies": {}
+  "test-globals": {
+    "mocha": "mocha",
+    "chai": "chai",
+    "animation": "animation"
+  },
+  "dependencies": {
+    "velocity": "~1.2.3"
+  },
+  "devDependencies": {
+    "mocha": "~2.3.4",
+    "chai": "~3.4.2"
+  }
 }

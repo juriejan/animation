@@ -26,7 +26,7 @@ function packageApplication (entry, dest, globals) {
       dest,
       globals,
       format: 'umd',
-      moduleName: 'dropdown'
+      moduleName: 'animation'
     }))
     .then((result) => {
       var mapFileName = `${dest}.map`
@@ -41,9 +41,9 @@ function packageApplication (entry, dest, globals) {
 
 function build () {
   return Promise.resolve()
-    .then(() => utils.mkdirs('dest'))
-    .then(() => utils.mkdirs('dest/js'))
     .then(() => lint())
+    .then(() => utils.mkdirs('dist'))
+    .then(() => utils.mkdirs('dist/js'))
     .then(() => packageApplication('src/index.js', TARGET, GLOBALS))
 }
 

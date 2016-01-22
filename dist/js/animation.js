@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.dropdown = factory());
+  (global.animation = factory());
 }(this, function () { 'use strict';
 
   function getOriginal(el, name) {
@@ -277,4 +277,4 @@
   return index;
 
 }));
-//# sourceMappingURL=dest/js/animation.js.map
+//# sourceMappingURL=dist/js/animation.js.map
