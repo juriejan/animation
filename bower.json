@@ -13,8 +13,12 @@
   "description": "",
   "ignore": [
     ".editorconfig",
-    ".gitignore"
+    ".gitignore",
+    "scripts"
   ],
+  "source": ["src/**/*"],
+  "build-target": "dest/js/animation.js",
+  "globals": {},
   "resolutions": {},
   "dependencies": {},
   "devDependencies": {}
