@@ -16,7 +16,11 @@
     "node": ">=5.4.0",
     "npm": ">=3.3.12"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "bluebird": "^3.1.1"
+  }
 }
