@@ -27,12 +27,11 @@ function packageApplication (entry, dest, globals, moduleName) {
       dest, globals, moduleName, format: 'umd'
     }))
     .then((result) => {
-      var destFileName = path.basename(dest)
-      var mapFileName = `${destFileName}.map`
+      var mapFileName = `${path.basename(dest)}.map`
       var code = result.code + `\n//# sourceMappingURL=${mapFileName}`
       return Promise.all([
         fs.writeFileAsync(dest, code),
-        fs.writeFileAsync(mapFileName, result.map)
+        fs.writeFileAsync(`${dest}.map`, result.map)
       ])
     })
     .then(() => utils.log(`Packaged application at '${entry}'`))
