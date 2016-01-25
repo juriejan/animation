@@ -1,4 +1,6 @@
 
+const path = require('path')
+
 const _ = require('lodash')
 
 const rollup = require('rollup')
@@ -29,7 +31,8 @@ function packageApplication (entry, dest, globals) {
       moduleName: 'animation'
     }))
     .then((result) => {
-      var mapFileName = `${dest}.map`
+      var destFileName = path.basename(dest)
+      var mapFileName = `${destFileName}.map`
       var code = result.code + `\n//# sourceMappingURL=${mapFileName}`
       return Promise.all([
         fs.writeFileAsync(dest, code),

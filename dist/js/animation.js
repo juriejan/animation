@@ -277,4 +277,4 @@
   return index;
 
 }));
-//# sourceMappingURL=dist/js/animation.js.map
+//# sourceMappingURL=animation.js.map
