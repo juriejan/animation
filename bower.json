@@ -23,6 +23,7 @@
   "source": [
     "src/**/*"
   ],
+  "module-name": "animation",
   "build-target": "dist/js/animation.js",
   "globals": {},
   "test-globals": {

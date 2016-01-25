@@ -14,21 +14,17 @@ const lint = require('./lint')
 const utils = require('./utils')
 
 const PACKAGE = require('../bower.json')
+const NAME = PACKAGE['module-name']
 const TARGET = PACKAGE['build-target']
 const GLOBALS = PACKAGE['globals']
 
-function packageApplication (entry, dest, globals) {
+function packageApplication (entry, dest, globals, moduleName) {
   return Promise.resolve()
     .then(() => rollup.rollup({
-      entry,
-      external: _.keys(globals),
-      plugins: [rollupBabel()]
+      entry, external: _.keys(globals), plugins: [rollupBabel()]
     }))
     .then((bundle) => bundle.generate({
-      dest,
-      globals,
-      format: 'umd',
-      moduleName: 'animation'
+      dest, globals, moduleName, format: 'umd'
     }))
     .then((result) => {
       var destFileName = path.basename(dest)
@@ -47,7 +43,7 @@ function build () {
     .then(() => lint())
     .then(() => utils.mkdirs('dist'))
     .then(() => utils.mkdirs('dist/js'))
-    .then(() => packageApplication('src/index.js', TARGET, GLOBALS))
+    .then(() => packageApplication('src/index.js', TARGET, GLOBALS, NAME))
 }
 
 module.exports = build
