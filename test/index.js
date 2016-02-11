@@ -55,6 +55,15 @@ describe('Animation exposes', function () {
   it('visible', function () {
     expect(animation.visible).to.exists
   })
+  it('basisShrink', function () {
+    expect(animation.basisShrink).to.exists
+  })
+  it('basisGrow', function () {
+    expect(animation.basisGrow).to.exists
+  })
+  it('basisZero', function () {
+    expect(animation.basisZero).to.exists
+  })
 })
 
 mocha.run()

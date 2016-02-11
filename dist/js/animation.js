@@ -254,7 +254,49 @@
     }
   }
 
+  function basisGrow(el, size, done) {
+    // Set the initial styles
+    var initial = { opacity: 0, 'flex-basis': 0 };
+    el.css(initial);
+    // Animate the grow
+    var final = { opacity: 1 };
+    // Determine the size to grow to
+    if (size) {
+      final['flex-basis'] = size;
+    } else {
+      final['flex-basis'] = getOriginal(el, 'flex-basis');
+    }
+    // Initiate animation
+    el.velocity(final, {
+      easing: 'easeInOutCubic',
+      display: '',
+      queue: false,
+      complete: done
+    });
+  }
+
+  function basisShrink(el, done) {
+    var final = { opacity: 0, 'flex-basis': 0 };
+    // Initiate animation
+    el.velocity(final, {
+      easing: 'easeInOutCubic',
+      display: '',
+      queue: false,
+      complete: done
+    });
+  }
+
+  function basisZero(el) {
+    el.css({
+      opacity: 0,
+      'flex-basis': 0
+    });
+  }
+
   var index = {
+    basisGrow,
+    basisShrink,
+    basisZero,
     flat,
     flexGrow,
     flexShrink,
