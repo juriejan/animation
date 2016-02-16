@@ -1,4 +1,6 @@
 
+import $ from 'jquery'
+
 function getOriginal (el, name) {
   var current = el.css(name)
   el.css(name, '')
@@ -276,7 +278,16 @@ function basisZero (el) {
   })
 }
 
+function a (el, properties, options) {
+  options = options || {}
+  options = Object.assign({
+    easing: 'easeInOutCubic'
+  }, options)
+  return $.Velocity.animate(el, properties, options)
+}
+
 export default {
+  a,
   basisGrow,
   basisShrink,
   basisZero,

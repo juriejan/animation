@@ -1,8 +1,10 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.animation = factory());
-}(this, function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
+  typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+  (global.animation = factory(global.$));
+}(this, function ($) { 'use strict';
+
+  $ = 'default' in $ ? $['default'] : $;
 
   function getOriginal(el, name) {
     var current = el.css(name);
@@ -293,7 +295,16 @@
     });
   }
 
+  function a(el, properties, options) {
+    options = options || {};
+    options = Object.assign({
+      easing: 'easeInOutCubic'
+    }, options);
+    return $.Velocity.animate(el, properties, options);
+  }
+
   var index = {
+    a,
     basisGrow,
     basisShrink,
     basisZero,

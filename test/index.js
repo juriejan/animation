@@ -4,6 +4,9 @@ import {expect} from 'chai'
 import animation from 'animation'
 
 describe('Animation exposes', function () {
+  it('a', function () {
+    expect(animation.a).to.exists
+  })
   it('show', function () {
     expect(animation.show).to.exists
   })
