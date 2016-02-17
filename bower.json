@@ -32,7 +32,7 @@
     "animation": "animation"
   },
   "dependencies": {
-    "velocity": "~1.2.3"
+    "velocity": "juriejan/velocity#master"
   },
   "devDependencies": {
     "mocha": "~2.3.4",
