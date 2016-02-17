@@ -174,13 +174,15 @@ function hideRegion (region, done) {
   }
 }
 
-function scroll (el, container) {
-  el.velocity('scroll', {
+function scroll (el, container, options) {
+  options = options || {}
+  options = Object.assign({
     axis: 'y',
     duration: 'fast',
     easing: 'easeInOutCubic',
     container: container
-  })
+  }, options)
+  el.velocity('scroll', options)
 }
 
 function thin (el) {
