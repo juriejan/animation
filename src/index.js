@@ -1,4 +1,5 @@
 
+import _ from 'lodash'
 import $ from 'jquery'
 
 function getOriginal (el, name) {
@@ -83,28 +84,30 @@ function flexShrink (el, basis, hide, done) {
 function grow (el, dimension, size, done) {
   // Set the initial styles
   var initial = {opacity: 0}
+  var final = {opacity: 1}
   initial[dimension] = 0
   el.css(initial)
-  // Animate the grow
-  var final = {opacity: 1}
-  // Determine the size to grow to
-  if (size) {
-    final[dimension] = size
-  } else {
-    final[dimension] = getOriginal(el, dimension)
-  }
-  // Detemrine the original margins
+  // Detemrine the appropriate properties
+  var properties
   if (dimension === 'width') {
-    final['margin-left'] = getOriginal(el, 'margin-left')
-    final['margin-right'] = getOriginal(el, 'margin-right')
-    final['padding-right'] = getOriginal(el, 'padding-right')
-    final['padding-left'] = getOriginal(el, 'padding-left')
+    properties = [
+      'width', 'margin-left', 'margin-right', 'padding-left', 'padding-right'
+    ]
   } else {
-    final['margin-top'] = getOriginal(el, 'margin-top')
-    final['margin-bottom'] = getOriginal(el, 'margin-bottom')
-    final['padding-top'] = getOriginal(el, 'padding-top')
-    final['padding-bottom'] = getOriginal(el, 'padding-bottom')
+    properties = [
+      'height', 'margin-top', 'margin-bottom', 'padding-top', 'padding-bottom'
+    ]
   }
+  // Retrieve and store the set values
+  var values = el.css(properties)
+  // Reset values to original
+  el.css(_.zipObject(properties, _.fill(Array(properties.length), '')))
+  // Set the final values
+  var original = el.css(properties)
+  final = Object.assign(final, original)
+  if (size) final[dimension] = size
+  // Reapply the previous values
+  el.css(values)
   // Initiate animation
   el.velocity(final, {
     easing: 'easeInOutCubic',

@@ -25,14 +25,18 @@
   ],
   "module-name": "animation",
   "build-target": "dist/js/animation.js",
-  "globals": {},
+  "globals": {
+    "jquery": "$",
+    "lodash": "_"
+  },
   "test-globals": {
     "mocha": "mocha",
     "chai": "chai",
     "animation": "animation"
   },
   "dependencies": {
-    "velocity": "juriejan/velocity#master"
+    "velocity": "juriejan/velocity#master",
+    "lodash": "~4.0.0"
   },
   "devDependencies": {
     "mocha": "~2.3.4",
