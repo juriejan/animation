@@ -199,25 +199,17 @@
   }
 
   function thin(el) {
-    el.css({
-      opacity: 0,
-      width: 0,
-      'margin-left': 0,
-      'margin-right': 0,
-      'padding-left': 0,
-      'padding-right': 0
-    });
+    var final = _.clone(DIMENSIONS['width']);
+    final = _.fromPairs(_.map(final, o => [o, 0]));
+    final.opacity = 0;
+    el.css(final);
   }
 
   function flat(el) {
-    el.css({
-      opacity: 0,
-      height: 0,
-      'margin-top': 0,
-      'margin-bottom': 0,
-      'padding-top': 0,
-      'padding-bottom': 0
-    });
+    var final = _.clone(DIMENSIONS['height']);
+    final = _.fromPairs(_.map(final, o => [o, 0]));
+    final.opacity = 0;
+    el.css(final);
   }
 
   function original(el) {
