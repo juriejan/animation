@@ -87,7 +87,7 @@ function flexGrow (el, basis, show, done) {
   if (show) { final.opacity = 1 }
   if (basis) { final['flex-basis'] = basis + 'px' }
   // Run the animation
-  el.velocity(final, {easing: 'easeInOutCubic', complete: done})
+  return a(el, final, {complete: done})
 }
 
 function flexShrink (el, basis, hide, done) {
@@ -105,7 +105,7 @@ function flexShrink (el, basis, hide, done) {
     final = _.assign(final, properties)
   }
   // Run the animation
-  el.velocity(final, {easing: 'easeInOutCubic', complete: done})
+  return a(el, final, {complete: done})
 }
 
 function grow (el, dimension, size, done) {
@@ -123,12 +123,7 @@ function grow (el, dimension, size, done) {
   final.opacity = 1
   if (size) final[dimension] = size
   // Run the animation
-  el.velocity(final, {
-    easing: 'easeInOutCubic',
-    display: '',
-    queue: false,
-    complete: done
-  })
+  return a(el, final, {display: '', queue: false, complete: done})
 }
 
 function shrink (el, dimension, done) {
@@ -138,12 +133,7 @@ function shrink (el, dimension, done) {
   // Indicate the final opacity
   final.opacity = 0
   // Run the animation
-  el.velocity(final, {
-    easing: 'easeInOutCubic',
-    display: '',
-    queue: false,
-    complete: done
-  })
+  return a(el, final, {display: '', queue: false, complete: done})
 }
 
 function toggleIcon (onIcon, offIcon, status, animate) {
