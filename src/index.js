@@ -2,6 +2,13 @@
 import _ from 'lodash'
 import $ from 'jquery'
 
+const DIMENSIONS = {
+  width: ['width', 'margin-left', 'margin-right', 'padding-left', 'padding-right'],
+  height: ['height', 'margin-top', 'margin-bottom', 'padding-top', 'padding-bottom'],
+  row: ['margin-left', 'margin-right', 'padding-left', 'padding-right'],
+  column: ['margin-top', 'margin-bottom', 'padding-top', 'padding-bottom']
+}
+
 function getOriginal (el, name) {
   var current = el.css(name)
   el.css(name, '')
@@ -68,47 +75,54 @@ function slideIn (el, side, done, progress) {
 }
 
 function flexGrow (el, basis, show, done) {
-  var final = {'flex-grow': '1'}
+  // Determine the final properties by removing, storing and reapplying
+  var direction = el.parent().css('flex-direction')
+  var properties = _.clone(DIMENSIONS[direction])
+  var values = el.css(properties)
+  el.css(_.fromPairs(_.map(properties, (o) => [o, ''])))
+  var final = el.css(properties)
+  el.css(values)
+  // Indicate final flex and opacity properties
+  final['flex-grow'] = '1'
   if (show) { final.opacity = 1 }
   if (basis) { final['flex-basis'] = basis + 'px' }
+  // Run the animation
   el.velocity(final, {easing: 'easeInOutCubic', complete: done})
 }
 
 function flexShrink (el, basis, hide, done) {
-  var final = {'flex-grow': '.0001'}
+  var final = {}
+  // Indicate final flex and opacity properties
+  final['flex-grow'] = '.0001'
   if (hide) { final.opacity = 0 }
-  if (basis) { final['flex-basis'] = basis + 'px' }
+  // Determine the final basis or paddgin and margin
+  if (basis) {
+    final['flex-basis'] = basis + 'px'
+  } else {
+    var direction = el.parent().css('flex-direction')
+    var properties = _.clone(DIMENSIONS[direction])
+    properties = _.fromPairs(_.map(properties, (o) => [o, 0]))
+    final = _.assign(final, properties)
+  }
+  // Run the animation
   el.velocity(final, {easing: 'easeInOutCubic', complete: done})
 }
 
 function grow (el, dimension, size, done) {
   // Set the initial styles
   var initial = {opacity: 0}
-  var final = {opacity: 1}
   initial[dimension] = 0
   el.css(initial)
-  // Detemrine the appropriate properties
-  var properties
-  if (dimension === 'width') {
-    properties = [
-      'width', 'margin-left', 'margin-right', 'padding-left', 'padding-right'
-    ]
-  } else {
-    properties = [
-      'height', 'margin-top', 'margin-bottom', 'padding-top', 'padding-bottom'
-    ]
-  }
-  // Retrieve and store the set values
+  // Determine the final properties by removing, storing and reapplying
+  var properties = _.clone(DIMENSIONS[dimension])
   var values = el.css(properties)
-  // Reset values to original
-  el.css(_.zipObject(properties, _.fill(Array(properties.length), '')))
-  // Set the final values
-  var original = el.css(properties)
-  final = Object.assign(final, original)
-  if (size) final[dimension] = size
-  // Reapply the previous values
+  el.css(_.fromPairs(_.map(properties, (o) => [o, ''])))
+  var final = el.css(properties)
   el.css(values)
-  // Initiate animation
+  // Indicate the final opacity and size properties
+  final.opacity = 1
+  if (size) final[dimension] = size
+  // Run the animation
   el.velocity(final, {
     easing: 'easeInOutCubic',
     display: '',
@@ -118,21 +132,12 @@ function grow (el, dimension, size, done) {
 }
 
 function shrink (el, dimension, done) {
-  var final = {opacity: 0}
-  final[dimension] = 0
-  // Set the appropriate margins to zero
-  if (dimension === 'width') {
-    final['margin-left'] = 0
-    final['margin-right'] = 0
-    final['padding-left'] = 0
-    final['padding-right'] = 0
-  } else {
-    final['margin-top'] = 0
-    final['margin-bottom'] = 0
-    final['padding-top'] = 0
-    final['padding-bottom'] = 0
-  }
-  // Initiate animation
+  // Determine the final properties
+  var final = _.clone(DIMENSIONS[dimension])
+  final = _.fromPairs(_.map(final, (o) => [o, 0]))
+  // Indicate the final opacity
+  final.opacity = 0
+  // Run the animation
   el.velocity(final, {
     easing: 'easeInOutCubic',
     display: '',
