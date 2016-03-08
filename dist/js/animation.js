@@ -7,7 +7,7 @@
   _ = 'default' in _ ? _['default'] : _;
   $ = 'default' in $ ? $['default'] : $;
 
-  const DIMENSIONS = {
+  var DIMENSIONS = {
     width: ['width', 'margin-left', 'margin-right', 'padding-left', 'padding-right'],
     height: ['height', 'margin-top', 'margin-bottom', 'padding-top', 'padding-bottom'],
     row: ['margin-left', 'margin-right', 'padding-left', 'padding-right'],
@@ -84,7 +84,9 @@
     var direction = el.parent().css('flex-direction');
     var properties = _.clone(DIMENSIONS[direction]);
     var values = el.css(properties);
-    el.css(_.fromPairs(_.map(properties, o => [o, ''])));
+    el.css(_.fromPairs(_.map(properties, function (o) {
+      return [o, ''];
+    })));
     var final = el.css(properties);
     el.css(values);
     // Indicate final flex and opacity properties
@@ -112,7 +114,9 @@
     } else {
       var direction = el.parent().css('flex-direction');
       var properties = _.clone(DIMENSIONS[direction]);
-      properties = _.fromPairs(_.map(properties, o => [o, 0]));
+      properties = _.fromPairs(_.map(properties, function (o) {
+        return [o, 0];
+      }));
       final = _.assign(final, properties);
     }
     // Run the animation
@@ -127,7 +131,9 @@
     // Determine the final properties by removing, storing and reapplying
     var properties = _.clone(DIMENSIONS[dimension]);
     var values = el.css(properties);
-    el.css(_.fromPairs(_.map(properties, o => [o, ''])));
+    el.css(_.fromPairs(_.map(properties, function (o) {
+      return [o, ''];
+    })));
     var final = el.css(properties);
     el.css(values);
     // Indicate the final opacity and size properties
@@ -140,7 +146,9 @@
   function shrink(el, dimension, done) {
     // Determine the final properties
     var final = _.clone(DIMENSIONS[dimension]);
-    final = _.fromPairs(_.map(final, o => [o, 0]));
+    final = _.fromPairs(_.map(final, function (o) {
+      return [o, 0];
+    }));
     // Indicate the final opacity
     final.opacity = 0;
     // Run the animation
@@ -200,14 +208,18 @@
 
   function thin(el) {
     var final = _.clone(DIMENSIONS['width']);
-    final = _.fromPairs(_.map(final, o => [o, 0]));
+    final = _.fromPairs(_.map(final, function (o) {
+      return [o, 0];
+    }));
     final.opacity = 0;
     el.css(final);
   }
 
   function flat(el) {
     var final = _.clone(DIMENSIONS['height']);
-    final = _.fromPairs(_.map(final, o => [o, 0]));
+    final = _.fromPairs(_.map(final, function (o) {
+      return [o, 0];
+    }));
     final.opacity = 0;
     el.css(final);
   }
@@ -294,27 +306,27 @@
   }
 
   var index = {
-    a,
-    basisGrow,
-    basisShrink,
-    basisZero,
-    flat,
-    flexGrow,
-    flexShrink,
-    grow,
-    hide,
-    hideRegion,
-    original,
-    scroll,
-    setIn,
-    show,
-    showRegion,
-    shrink,
-    slideIn,
-    slideOut,
-    thin,
-    toggleIcon,
-    visible
+    a: a,
+    basisGrow: basisGrow,
+    basisShrink: basisShrink,
+    basisZero: basisZero,
+    flat: flat,
+    flexGrow: flexGrow,
+    flexShrink: flexShrink,
+    grow: grow,
+    hide: hide,
+    hideRegion: hideRegion,
+    original: original,
+    scroll: scroll,
+    setIn: setIn,
+    show: show,
+    showRegion: showRegion,
+    shrink: shrink,
+    slideIn: slideIn,
+    slideOut: slideOut,
+    thin: thin,
+    toggleIcon: toggleIcon,
+    visible: visible
   };
 
   return index;
