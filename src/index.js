@@ -84,17 +84,22 @@ function flexGrow (el, basis, show, done) {
   el.css(values)
   // Indicate final flex and opacity properties
   final['flex-grow'] = '1'
-  if (show) { final.opacity = 1 }
-  if (basis) { final['flex-basis'] = basis + 'px' }
+  if (show) final.opacity = 1
+  if (basis) final['flex-basis'] = basis + 'px'
   // Run the animation
+  console.log(final)
   return a(el, final, {complete: done})
+    .then(() => { if (show) el.css('pointer-events', 'all') })
 }
 
 function flexShrink (el, basis, hide, done) {
   var final = {}
   // Indicate final flex and opacity properties
   final['flex-grow'] = '.0001'
-  if (hide) { final.opacity = 0 }
+  if (hide) {
+    el.css({'pointer-events': 'none'})
+    Object.assign(final, {opacity: 0})
+  }
   // Determine the final basis or paddgin and margin
   if (basis) {
     final['flex-basis'] = basis + 'px'
@@ -124,9 +129,12 @@ function grow (el, dimension, size, done) {
   if (size) final[dimension] = size
   // Run the animation
   return a(el, final, {display: '', queue: false, complete: done})
+    .then(() => el.css('pointer-events', 'all'))
 }
 
 function shrink (el, dimension, done) {
+  // Set the initial styles
+  el.css({'pointer-events': 'none'})
   // Determine the final properties
   var final = _.clone(DIMENSIONS[dimension])
   final = _.fromPairs(_.map(final, (o) => [o, 0]))
@@ -187,6 +195,7 @@ function thin (el) {
   var final = _.clone(DIMENSIONS['width'])
   final = _.fromPairs(_.map(final, (o) => [o, 0]))
   final.opacity = 0
+  final['pointer-events'] = 'none'
   el.css(final)
 }
 
@@ -194,6 +203,7 @@ function flat (el) {
   var final = _.clone(DIMENSIONS['height'])
   final = _.fromPairs(_.map(final, (o) => [o, 0]))
   final.opacity = 0
+  final['pointer-events'] = 'none'
   el.css(final)
 }
 

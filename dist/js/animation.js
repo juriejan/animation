@@ -91,14 +91,13 @@
     el.css(values);
     // Indicate final flex and opacity properties
     final['flex-grow'] = '1';
-    if (show) {
-      final.opacity = 1;
-    }
-    if (basis) {
-      final['flex-basis'] = basis + 'px';
-    }
+    if (show) final.opacity = 1;
+    if (basis) final['flex-basis'] = basis + 'px';
     // Run the animation
-    return a(el, final, { complete: done });
+    console.log(final);
+    return a(el, final, { complete: done }).then(function () {
+      if (show) el.css('pointer-events', 'all');
+    });
   }
 
   function flexShrink(el, basis, hide, done) {
@@ -106,7 +105,8 @@
     // Indicate final flex and opacity properties
     final['flex-grow'] = '.0001';
     if (hide) {
-      final.opacity = 0;
+      el.css({ 'pointer-events': 'none' });
+      Object.assign(final, { opacity: 0 });
     }
     // Determine the final basis or paddgin and margin
     if (basis) {
@@ -140,10 +140,14 @@
     final.opacity = 1;
     if (size) final[dimension] = size;
     // Run the animation
-    return a(el, final, { display: '', queue: false, complete: done });
+    return a(el, final, { display: '', queue: false, complete: done }).then(function () {
+      return el.css('pointer-events', 'all');
+    });
   }
 
   function shrink(el, dimension, done) {
+    // Set the initial styles
+    el.css({ 'pointer-events': 'none' });
     // Determine the final properties
     var final = _.clone(DIMENSIONS[dimension]);
     final = _.fromPairs(_.map(final, function (o) {
@@ -212,6 +216,7 @@
       return [o, 0];
     }));
     final.opacity = 0;
+    final['pointer-events'] = 'none';
     el.css(final);
   }
 
@@ -221,6 +226,7 @@
       return [o, 0];
     }));
     final.opacity = 0;
+    final['pointer-events'] = 'none';
     el.css(final);
   }
 
