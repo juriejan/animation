@@ -243,7 +243,8 @@
       'padding-top': '',
       'padding-bottom': '',
       'padding-left': '',
-      'padding-right': ''
+      'padding-right': '',
+      'pointer-events': ''
     });
   }
 
