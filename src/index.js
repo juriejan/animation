@@ -89,7 +89,7 @@ function flexGrow (el, basis, show, done) {
   // Run the animation
   console.log(final)
   return a(el, final, {complete: done})
-    .then(() => { if (show) el.css('pointer-events', 'all') })
+    .then(() => { if (show) el.css('pointer-events', 'inherit') })
 }
 
 function flexShrink (el, basis, hide, done) {
@@ -129,7 +129,7 @@ function grow (el, dimension, size, done) {
   if (size) final[dimension] = size
   // Run the animation
   return a(el, final, {display: '', queue: false, complete: done})
-    .then(() => el.css('pointer-events', 'all'))
+    .then(() => el.css('pointer-events', 'inherit'))
 }
 
 function shrink (el, dimension, done) {

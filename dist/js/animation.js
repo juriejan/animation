@@ -94,8 +94,9 @@
     if (show) final.opacity = 1;
     if (basis) final['flex-basis'] = basis + 'px';
     // Run the animation
+    console.log(final);
     return a(el, final, { complete: done }).then(function () {
-      if (show) el.css('pointer-events', 'all');
+      if (show) el.css('pointer-events', 'inherit');
     });
   }
 
@@ -140,7 +141,7 @@
     if (size) final[dimension] = size;
     // Run the animation
     return a(el, final, { display: '', queue: false, complete: done }).then(function () {
-      return el.css('pointer-events', 'all');
+      return el.css('pointer-events', 'inherit');
     });
   }
 
