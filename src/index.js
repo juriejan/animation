@@ -87,7 +87,6 @@ function flexGrow (el, basis, show, done) {
   if (show) final.opacity = 1
   if (basis) final['flex-basis'] = basis + 'px'
   // Run the animation
-  console.log(final)
   return a(el, final, {complete: done})
     .then(() => { if (show) el.css('pointer-events', 'inherit') })
 }
