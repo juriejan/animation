@@ -45,7 +45,7 @@ function hide (el, done) {
   })
 }
 
-function slideOut (el, side, done, progress) {
+function slideOut (el, side, complete, progress) {
   var margin = 'margin-' + side
   var properties = {opacity: 1}
   var size = determineSize(el, side)
@@ -54,27 +54,19 @@ function slideOut (el, side, done, progress) {
   el.css('display', '')
   // Animate to the new properties
   properties[margin] = 0
-  el.velocity(properties, {
-    easing: 'easeInOutCubic',
-    progress: progress,
-    complete: done
-  })
+  el.velocity(properties, {easing: 'easeInOutCubic', progress, complete})
 }
 
-function slideIn (el, side, done, progress) {
+function slideIn (el, side, complete, progress) {
   var margin = 'margin-' + side
   var properties = {opacity: 0}
   var size = determineSize(el, side)
   // Animate to the new properties
   properties[margin] = '-' + size + 'px'
-  el.velocity(properties, {
-    easing: 'easeInOutCubic',
-    progress: progress,
-    complete: done
-  })
+  el.velocity(properties, {easing: 'easeInOutCubic', progress, complete})
 }
 
-function flexGrow (el, basis, show, done) {
+function flexGrow (el, basis, show, complete) {
   // Determine the final properties by removing, storing and reapplying
   var direction = el.parent().css('flex-direction')
   var properties = _.clone(DIMENSIONS[direction])
@@ -87,11 +79,11 @@ function flexGrow (el, basis, show, done) {
   if (show) final.opacity = 1
   if (basis) final['flex-basis'] = basis + 'px'
   // Run the animation
-  return a(el, final, {complete: done})
+  return a(el, final, {complete})
     .then(() => { if (show) el.css('pointer-events', 'inherit') })
 }
 
-function flexShrink (el, basis, hide, done) {
+function flexShrink (el, basis, hide, complete) {
   var final = {}
   // Indicate final flex and opacity properties
   final['flex-grow'] = '.0001'
@@ -109,10 +101,10 @@ function flexShrink (el, basis, hide, done) {
     final = _.assign(final, properties)
   }
   // Run the animation
-  return a(el, final, {complete: done})
+  return a(el, final, {complete})
 }
 
-function grow (el, dimension, size, done) {
+function grow (el, dimension, size, complete, progress) {
   // Set the initial styles
   var initial = {opacity: 0}
   initial[dimension] = 0
@@ -127,11 +119,11 @@ function grow (el, dimension, size, done) {
   final.opacity = 1
   if (size) final[dimension] = size
   // Run the animation
-  return a(el, final, {display: '', queue: false, complete: done})
+  return a(el, final, {display: '', queue: false, complete, progress})
     .then(() => el.css('pointer-events', 'inherit'))
 }
 
-function shrink (el, dimension, done) {
+function shrink (el, dimension, complete, progress) {
   // Set the initial styles
   el.css({'pointer-events': 'none'})
   // Determine the final properties
@@ -140,7 +132,7 @@ function shrink (el, dimension, done) {
   // Indicate the final opacity
   final.opacity = 0
   // Run the animation
-  return a(el, final, {display: '', queue: false, complete: done})
+  return a(el, final, {display: '', queue: false, complete, progress})
 }
 
 function toggleIcon (onIcon, offIcon, status, animate) {
