@@ -22,7 +22,10 @@
     "lint": "node scripts/lint.js",
     "test": "node scripts/test.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bower": "^1.7.9",
+    "fs-extra": "^0.30.0"
+  },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
     "babel-preset-es2015-rollup": "^1.1.1",
