@@ -31,7 +31,7 @@
   }
 
   function show(el, done) {
-    el.velocity({ opacity: 1 }, {
+    a(el, { opacity: 1 }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
       complete: done,
@@ -41,7 +41,7 @@
   }
 
   function hide(el, done) {
-    el.velocity({ opacity: 0 }, {
+    return a(el, { opacity: 0 }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
       complete: done,
