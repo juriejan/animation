@@ -30,21 +30,19 @@
     }
   }
 
-  function show(el, done) {
+  function show(el) {
     return a(el, { opacity: 1 }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
-      complete: done,
       visibility: 'visible',
       queue: false
     });
   }
 
-  function hide(el, done) {
+  function hide(el) {
     return a(el, { opacity: 0 }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
-      complete: done,
       visibility: 'hidden',
       queue: false
     });
