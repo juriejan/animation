@@ -31,7 +31,7 @@
   }
 
   function show(el, done) {
-    a(el, { opacity: 1 }, {
+    return a(el, { opacity: 1 }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
       complete: done,
@@ -170,23 +170,18 @@
     }
   }
 
-  function showRegion(region, view, done) {
+  function showRegion(region, view) {
     region.show(view);
-    this.show(region.$el, done);
+    return this.show(region.$el);
   }
 
-  function hideRegion(region, done) {
+  function hideRegion(region) {
     if (region.hasView()) {
-      this.hide(region.$el, function () {
+      return this.hide(region.$el).then(function () {
         region.reset();
-        if (done) {
-          done();
-        }
       });
     } else {
-      if (done) {
-        done();
-      }
+      return Promise.resolve();
     }
   }
 
