@@ -243,9 +243,9 @@
 
   function visible(el, state) {
     if (state) {
-      el.css({ opacity: 1, visibility: 'visible' });
+      el.css({ opacity: 1, 'pointer-events': '' });
     } else {
-      el.css({ opacity: 0, visibility: 'hidden' });
+      el.css({ opacity: 0, 'pointer-events': 'none' });
     }
   }
 
