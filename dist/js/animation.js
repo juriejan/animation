@@ -38,11 +38,16 @@
       duration: 'fast',
       visibility: 'visible',
       queue: false
+    }).then(function () {
+      return el.css('pointer-events', 'all');
     });
   }
 
   function hide(el) {
-    return a(el, { opacity: 0 }, {
+    return a(el, {
+      opacity: 0,
+      'pointer-events': 'none'
+    }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
       visibility: 'hidden',
@@ -97,7 +102,7 @@
     if (basis) final['flex-basis'] = basis + 'px';
     // Run the animation
     return a(el, final, { complete: complete }).then(function () {
-      if (show) el.css('pointer-events', 'inherit');
+      if (show) el.css('pointer-events', 'all');
     });
   }
 

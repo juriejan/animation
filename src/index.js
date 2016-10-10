@@ -33,11 +33,14 @@ function show (el) {
     duration: 'fast',
     visibility: 'visible',
     queue: false
-  })
+  }).then(() => el.css('pointer-events', 'all'))
 }
 
 function hide (el) {
-  return a(el, {opacity: 0}, {
+  return a(el, {
+    opacity: 0,
+    'pointer-events': 'none'
+  }, {
     easing: 'easeInOutCubic',
     duration: 'fast',
     visibility: 'hidden',
@@ -90,7 +93,7 @@ function flexGrow (el, basis, show, complete) {
   if (basis) final['flex-basis'] = basis + 'px'
   // Run the animation
   return a(el, final, {complete})
-    .then(() => { if (show) el.css('pointer-events', 'inherit') })
+    .then(() => { if (show) el.css('pointer-events', 'all') })
 }
 
 function flexShrink (el, basis, hide, complete) {
