@@ -142,7 +142,7 @@
     if (size) final[dimension] = size;
     // Run the animation
     return a(el, final, { display: '', queue: false, complete: complete, progress: progress }).then(function () {
-      return el.css('pointer-events', 'inherit');
+      return el.css('pointer-events', 'all');
     });
   }
 
