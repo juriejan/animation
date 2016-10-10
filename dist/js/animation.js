@@ -14,6 +14,8 @@
     column: ['margin-top', 'margin-bottom', 'padding-top', 'padding-bottom']
   };
 
+  var DURATION = 150;
+
   function getOriginal(el, name) {
     var current = el.css(name);
     el.css(name, '');
@@ -57,7 +59,12 @@
     el.css('display', '');
     // Animate to the new properties
     properties[margin] = 0;
-    el.velocity(properties, { easing: 'easeInOutCubic', progress: progress, complete: complete });
+    el.velocity(properties, {
+      easing: 'easeInOutCubic',
+      duration: DURATION,
+      progress: progress,
+      complete: complete
+    });
   }
 
   function slideIn(el, side, complete, progress) {
@@ -66,7 +73,12 @@
     var size = determineSize(el, side);
     // Animate to the new properties
     properties[margin] = '-' + size + 'px';
-    el.velocity(properties, { easing: 'easeInOutCubic', progress: progress, complete: complete });
+    el.velocity(properties, {
+      easing: 'easeInOutCubic',
+      duration: DURATION,
+      progress: progress,
+      complete: complete
+    });
   }
 
   function flexGrow(el, basis, show, complete) {
@@ -264,6 +276,7 @@
     // Initiate animation
     el.velocity(final, {
       easing: 'easeInOutCubic',
+      duration: DURATION,
       display: '',
       queue: false,
       complete: done
@@ -275,6 +288,7 @@
     // Initiate animation
     el.velocity(final, {
       easing: 'easeInOutCubic',
+      duration: DURATION,
       display: '',
       queue: false,
       complete: done
@@ -291,7 +305,8 @@
   function a(el, properties, options) {
     options = options || {};
     options = Object.assign({
-      easing: 'easeInOutCubic'
+      easing: 'easeInOutCubic',
+      duration: DURATION
     }, options);
     return $.Velocity.animate(el, properties, options);
   }

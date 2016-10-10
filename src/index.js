@@ -9,6 +9,8 @@ const DIMENSIONS = {
   column: ['margin-top', 'margin-bottom', 'padding-top', 'padding-bottom']
 }
 
+const DURATION = 150
+
 function getOriginal (el, name) {
   var current = el.css(name)
   el.css(name, '')
@@ -52,7 +54,12 @@ function slideOut (el, side, complete, progress) {
   el.css('display', '')
   // Animate to the new properties
   properties[margin] = 0
-  el.velocity(properties, {easing: 'easeInOutCubic', progress, complete})
+  el.velocity(properties, {
+    easing: 'easeInOutCubic',
+    duration: DURATION,
+    progress,
+    complete
+  })
 }
 
 function slideIn (el, side, complete, progress) {
@@ -61,7 +68,12 @@ function slideIn (el, side, complete, progress) {
   var size = determineSize(el, side)
   // Animate to the new properties
   properties[margin] = '-' + size + 'px'
-  el.velocity(properties, {easing: 'easeInOutCubic', progress, complete})
+  el.velocity(properties, {
+    easing: 'easeInOutCubic',
+    duration: DURATION,
+    progress,
+    complete
+  })
 }
 
 function flexGrow (el, basis, show, complete) {
@@ -245,6 +257,7 @@ function basisGrow (el, size, done) {
   // Initiate animation
   el.velocity(final, {
     easing: 'easeInOutCubic',
+    duration: DURATION,
     display: '',
     queue: false,
     complete: done
@@ -256,6 +269,7 @@ function basisShrink (el, done) {
   // Initiate animation
   el.velocity(final, {
     easing: 'easeInOutCubic',
+    duration: DURATION,
     display: '',
     queue: false,
     complete: done
@@ -272,7 +286,8 @@ function basisZero (el) {
 function a (el, properties, options) {
   options = options || {}
   options = Object.assign({
-    easing: 'easeInOutCubic'
+    easing: 'easeInOutCubic',
+    duration: DURATION
   }, options)
   return $.Velocity.animate(el, properties, options)
 }
