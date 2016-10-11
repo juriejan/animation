@@ -166,6 +166,13 @@
   }
 
   function toggleIcon(onIcon, offIcon, status, animate) {
+    if (status) {
+      onIcon.css({ display: 'none' });
+      offIcon.css({ display: '' });
+    } else {
+      onIcon.css({ display: '' });
+      offIcon.css({ display: 'none' });
+    }
     if (animate) {
       if (status) {
         onIcon.velocity({ opacity: 0 }, { easing: 'easeInOutCubic' });
