@@ -149,28 +149,21 @@ function shrink (el, dimension, complete, progress) {
 }
 
 function toggleIcon (onIcon, offIcon, status, animate) {
-  if (status) {
-    onIcon.css({display: 'none'})
-    offIcon.css({display: ''})
-  } else {
-    onIcon.css({display: ''})
-    offIcon.css({display: 'none'})
-  }
   if (animate) {
     if (status) {
-      onIcon.velocity({opacity: 0}, {easing: 'easeInOutCubic'})
-      offIcon.velocity({opacity: 1}, {easing: 'easeInOutCubic'})
+      onIcon.velocity({opacity: 0}, {display: 'none', easing: 'easeInOutCubic'})
+      offIcon.velocity({opacity: 1}, {display: '', easing: 'easeInOutCubic'})
     } else {
-      onIcon.velocity({opacity: 1}, {easing: 'easeInOutCubic'})
-      offIcon.velocity({opacity: 0}, {easing: 'easeInOutCubic'})
+      onIcon.velocity({opacity: 1}, {display: '', easing: 'easeInOutCubic'})
+      offIcon.velocity({opacity: 0}, {display: 'none', easing: 'easeInOutCubic'})
     }
   } else {
     if (status) {
-      onIcon.css({opacity: 0})
-      offIcon.css({opacity: 1})
+      onIcon.css({opacity: 0, display: 'none'})
+      offIcon.css({opacity: 1, display: ''})
     } else {
-      onIcon.css({opacity: 1})
-      offIcon.css({opacity: 0})
+      onIcon.css({opacity: 1, display: ''})
+      offIcon.css({opacity: 0, display: 'none'})
     }
   }
 }
