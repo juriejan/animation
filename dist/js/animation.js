@@ -227,6 +227,7 @@
       return [o, 0];
     }));
     final.opacity = 0;
+    final.display = 'none';
     final['pointer-events'] = 'none';
     el.css(final);
   }
@@ -237,6 +238,7 @@
       visibility: '',
       height: '',
       width: '',
+      display: '',
       'margin-top': '',
       'margin-bottom': '',
       'margin-left': '',
