@@ -206,6 +206,7 @@ function flat (el) {
   var final = _.clone(DIMENSIONS['height'])
   final = _.fromPairs(_.map(final, (o) => [o, 0]))
   final.opacity = 0
+  final.display = 'none'
   final['pointer-events'] = 'none'
   el.css(final)
 }
@@ -216,6 +217,7 @@ function original (el) {
     visibility: '',
     height: '',
     width: '',
+    display: '',
     'margin-top': '',
     'margin-bottom': '',
     'margin-left': '',
