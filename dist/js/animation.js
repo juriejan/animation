@@ -112,7 +112,7 @@
     final['flex-grow'] = '.0001';
     if (hide) {
       el.css({ 'pointer-events': 'none' });
-      Object.assign(final, { opacity: 0 });
+      _.assign(final, { opacity: 0 });
     }
     // Determine the final basis or paddgin and margin
     if (basis) {
@@ -202,7 +202,7 @@
 
   function scroll(el, container, options) {
     options = options || {};
-    options = Object.assign({
+    _.assign({
       axis: 'y',
       duration: 'fast',
       easing: 'easeInOutCubic',
@@ -311,7 +311,7 @@
 
   function a(el, properties, options) {
     options = options || {};
-    options = Object.assign({
+    options = _.assign({
       easing: 'easeInOutCubic',
       duration: DURATION
     }, options);
