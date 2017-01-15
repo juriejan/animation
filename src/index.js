@@ -133,7 +133,10 @@ function grow (el, dimension, size, complete, progress) {
   if (size) final[dimension] = size
   // Run the animation
   return a(el, final, {display: '', queue: false, complete, progress})
-    .then(() => el.css('pointer-events', 'all'))
+    .then(() => {
+      el.css(dimension, '')
+      el.css('pointer-events', 'all')
+    })
 }
 
 function shrink (el, dimension, complete, progress) {
