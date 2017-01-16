@@ -31,19 +31,15 @@ function show (el) {
   return a(el, {opacity: 1}, {
     easing: 'easeInOutCubic',
     duration: 'fast',
-    visibility: 'visible',
     queue: false
   }).then(() => el.css('pointer-events', 'all'))
 }
 
 function hide (el) {
-  return a(el, {
-    opacity: 0,
-    'pointer-events': 'none'
-  }, {
+  el.css('pointer-events', 'none')
+  return a(el, {opacity: 0}, {
     easing: 'easeInOutCubic',
     duration: 'fast',
-    visibility: 'hidden',
     queue: false
   })
 }
