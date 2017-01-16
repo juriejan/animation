@@ -57,7 +57,7 @@ function slideOut (el, side, complete, progress) {
   el.css('display', '')
   // Animate to the new properties
   properties[margin] = 0
-  el.velocity(properties, {
+  return a(el, properties, {
     easing: 'easeInOutCubic',
     duration: DURATION,
     progress,
@@ -71,7 +71,7 @@ function slideIn (el, side, complete, progress) {
   var size = determineSize(el, side)
   // Animate to the new properties
   properties[margin] = '-' + size + 'px'
-  el.velocity(properties, {
+  return a(el, properties, {
     easing: 'easeInOutCubic',
     duration: DURATION,
     progress,
