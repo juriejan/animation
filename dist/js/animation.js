@@ -51,24 +51,24 @@
     });
   }
 
-  function slideOut(el, side, complete, progress) {
+  function slideOut(el, side, progress) {
     var margin = 'margin-' + side;
     var properties = { opacity: 1 };
     var size = determineSize(el, side);
     // Set the initial css properties
     el.css(margin, '-' + size + 'px');
     el.css('display', '');
+    el.css('pointer-events', 'all');
     // Animate to the new properties
     properties[margin] = 0;
     return a(el, properties, {
       easing: 'easeInOutCubic',
       duration: DURATION,
-      progress: progress,
-      complete: complete
+      progress: progress
     });
   }
 
-  function slideIn(el, side, complete, progress) {
+  function slideIn(el, side, progress) {
     var margin = 'margin-' + side;
     var properties = { opacity: 0 };
     var size = determineSize(el, side);
@@ -77,8 +77,9 @@
     return a(el, properties, {
       easing: 'easeInOutCubic',
       duration: DURATION,
-      progress: progress,
-      complete: complete
+      progress: progress
+    }).then(function () {
+      return el.css('pointer-events', 'none');
     });
   }
 

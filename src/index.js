@@ -44,24 +44,24 @@ function hide (el) {
   })
 }
 
-function slideOut (el, side, complete, progress) {
+function slideOut (el, side, progress) {
   var margin = 'margin-' + side
   var properties = {opacity: 1}
   var size = determineSize(el, side)
   // Set the initial css properties
   el.css(margin, '-' + size + 'px')
   el.css('display', '')
+  el.css('pointer-events', 'all')
   // Animate to the new properties
   properties[margin] = 0
   return a(el, properties, {
     easing: 'easeInOutCubic',
     duration: DURATION,
-    progress,
-    complete
+    progress
   })
 }
 
-function slideIn (el, side, complete, progress) {
+function slideIn (el, side, progress) {
   var margin = 'margin-' + side
   var properties = {opacity: 0}
   var size = determineSize(el, side)
@@ -70,9 +70,8 @@ function slideIn (el, side, complete, progress) {
   return a(el, properties, {
     easing: 'easeInOutCubic',
     duration: DURATION,
-    progress,
-    complete
-  })
+    progress
+  }).then(() => el.css('pointer-events', 'none'))
 }
 
 function flexGrow (el, basis, show, complete) {
