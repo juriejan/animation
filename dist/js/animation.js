@@ -166,19 +166,19 @@
   function toggleIcon(onIcon, offIcon, status, animate) {
     if (animate) {
       if (status) {
-        onIcon.velocity({ opacity: 0 }, { display: 'none', easing: 'easeInOutCubic' });
-        offIcon.velocity({ opacity: 1 }, { display: '', easing: 'easeInOutCubic' });
+        onIcon.velocity({ opacity: 0 }, { easing: 'easeInOutCubic' });
+        offIcon.velocity({ opacity: 1 }, { easing: 'easeInOutCubic' });
       } else {
-        onIcon.velocity({ opacity: 1 }, { display: '', easing: 'easeInOutCubic' });
-        offIcon.velocity({ opacity: 0 }, { display: 'none', easing: 'easeInOutCubic' });
+        onIcon.velocity({ opacity: 1 }, { easing: 'easeInOutCubic' });
+        offIcon.velocity({ opacity: 0 }, { easing: 'easeInOutCubic' });
       }
     } else {
       if (status) {
-        onIcon.css({ opacity: 0, display: 'none' });
-        offIcon.css({ opacity: 1, display: '' });
+        onIcon.css({ opacity: 0 });
+        offIcon.css({ opacity: 1 });
       } else {
-        onIcon.css({ opacity: 1, display: '' });
-        offIcon.css({ opacity: 0, display: 'none' });
+        onIcon.css({ opacity: 1 });
+        offIcon.css({ opacity: 0 });
       }
     }
   }
