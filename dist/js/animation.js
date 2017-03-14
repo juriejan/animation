@@ -33,12 +33,11 @@
   }
 
   function show(el) {
+    el.css('pointer-events', 'all');
     return a(el, { opacity: 1 }, {
       easing: 'easeInOutCubic',
       duration: 'fast',
       queue: false
-    }).then(function () {
-      return el.css('pointer-events', 'all');
     });
   }
 
